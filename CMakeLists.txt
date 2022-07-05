@@ -194,7 +194,19 @@ endif()
 
 # Find mp++.
 set(PIRANHA_MINIMUM_MPPP_VERSION 0.9)
-find_package(mp++ ${PIRANHA_MINIMUM_MPPP_VERSION} REQUIRED)
+find_package(mp++ ${PIRANHA_MINIMUM_MPPP_VERSION} QUIET)
+if (NOT mp++_FOUND)
+	message(STATUS "mp++ not found, building from sources.")
+	include(FetchContent)
+	FetchContent_Declare(
+		mp++
+		GIT_REPOSITORY https://github.com/bluescarni/mppp.git
+		GIT_TAG 7605c9596d3862ec9ff041f99acfbd7565a23806 # v0.26
+	)
+	FetchContent_MakeAvailable(mp++)
+endif()
+message(STATUS "mp++ found.")
+message(STATUS "mp++ version is: ${mp++_VERSION}")
 target_link_libraries(piranha INTERFACE mp++::mp++)
 
 if(PIRANHA_WITH_MSGPACK)
