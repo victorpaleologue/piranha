@@ -204,6 +204,7 @@ if (NOT mp++_FOUND)
 		GIT_TAG 7605c9596d3862ec9ff041f99acfbd7565a23806 # v0.26
 	)
 	FetchContent_MakeAvailable(mp++)
+	set(mp++_VERSION 0.26)
 endif()
 message(STATUS "mp++ found.")
 message(STATUS "mp++ version is: ${mp++_VERSION}")
