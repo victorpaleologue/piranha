@@ -75,9 +75,9 @@ endif()
 
 if(YACMA_COMPILER_IS_CLANGXX)
 	message(STATUS "Clang compiler detected, checking version.")
-	try_compile(PIRANHA_CLANG_VERSION_CHECK ${CMAKE_BINARY_DIR} "${CMAKE_SOURCE_DIR}/cmake_modules/clang_check_version.cpp")
+	try_compile(PIRANHA_CLANG_VERSION_CHECK ${CMAKE_BINARY_DIR} "${CMAKE_SOURCE_DIR}/cmake_modules/clang_check_version.cpp" OUTPUT_VARIABLE PIRANHA_CLANG_VERSION_CHECK_OUTPUT)
 	if(NOT PIRANHA_CLANG_VERSION_CHECK)
-		message(FATAL_ERROR "Unsupported Clang version, please upgrade your compiler.")
+		message(FATAL_ERROR "Unsupported Clang version, please upgrade your compiler.\nBuild output:\n${PIRANHA_CLANG_VERSION_CHECK_OUTPUT}")
 	endif()
 	message(STATUS "Clang version is ok.")
 	# Set the standard flag.
